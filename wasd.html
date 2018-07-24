@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>计算器</title>
+        <script>
+//            var caozuofu;
+            var flg = true;
+            var oldnum;
+            function buttononclick(num)
+            {
+                var inputtext = document.getElementById("textinput");
+                if(flg)
+                {
+                    var s = inputtext.value;
+                    inputtext.value = s+num;
+                }
+                else
+                {
+                    inputtext.value = num;
+                    flg = true;
+                }
+                
+            }
+            function opera(os)
+            {
+                var inputtext = document.getElementById("textinput");
+                oldnum = inputtext.value;
+                caozuofu = os;
+                flg = false;
+            }
+            function clr()
+            {
+                var inputtext = document.getElementById("textinput");
+                inputtext.value = 0;
+                flg = false;
+            }
+            function getresult()
+            {
+                var ret;
+                var inputtext = document.getElementById("textinput");
+                var newnum = inputtext.value;
+                switch(caozuofu)
+               {
+                    case "+":
+                        ret = parseInt(oldnum)+parseInt(newnum);
+                        inputtext.value = ret;
+                    break;
+                    case "-":
+                        ret = parseInt(oldnum)-parseInt(newnum);
+                        inputtext.value = ret;
+                    break;
+                    case "*":
+                        ret = parseInt(oldnum)*parseInt(newnum);
+                        inputtext.value = ret;
+                    break;
+                    case "/":
+                        if(parseInt(newnum) == 0)
+                        {
+                            inputtext.value="你虎啊！！";
+                            flg = false;
+                        }
+                        else
+                        {
+                            ret = parseInt(oldnum)/parseInt(newnum);
+                            inputtext.value = ret;
+                        }
+                        
+                    break;
+               }
+                flg = false;
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="textinput">
+            <br/>
+            <input type="button" value="1" onclick="buttononclick('1')">
+            <input type="button" value="2" onclick="buttononclick('2')">
+            <input type="button" value="3" onclick="buttononclick('3')">
+            <br/>
+            <input type="button" value="4" onclick="buttononclick('4')">
+            <input type="button" value="5" onclick="buttononclick('5')">
+            <input type="button" value="6" onclick="buttononclick('6')">
+            <br/>
+            <input type="button" value="7" onclick="buttononclick('7')">
+            <input type="button" value="8" onclick="buttononclick('8')">
+            <input type="button" value="9" onclick="buttononclick('9')">
+            <br/>
+            <input type="button" value="0" onclick="buttononclick('0')">
+            <input type="button" value="+" onclick="opera('+')">
+            <input type="button" value="-" 
+            onclick="opera('-')">
+            <br/>
+            <input type="button" value="*" onclick="opera('*')">
+            <input type="button" value="/" onclick="opera('/')">
+            <input type="button" value="=" onclick="getresult()">
+            <br/>
+            <input type="button" value="C" onclick="clr()">
+            
+        </form>
+    </body>
+</html>
